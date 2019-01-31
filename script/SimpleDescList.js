@@ -23,6 +23,7 @@ $(document).ready(function () {
         let id = descsOrdered[i];
         let ttt = document.createElement('li');
         ttt.innerHTML = "<b>" + descsConceptOrdered[i] + "</b>";
+        // TODO: jquery.min.js:2 Uncaught TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.
         ttt.appendChild(document.getElementById(id));
         document.getElementById("descs").appendChild(ttt);
     }
