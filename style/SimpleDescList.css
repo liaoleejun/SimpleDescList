@@ -1,11 +1,15 @@
-[data-dt] {
-    /*border-bottom: 1px dotted #4484C2;*/
+.description {
     text-decoration: none;
     color: inherit;
     border-bottom: 1px dotted #aba3a3;
+    /*border-bottom: 1px dotted #4484C2;*/
 }
 
-[data-dt]:hover {
+.description:hover {
     background: hsla(30, 20%, 90%, 1);
     transition: background 0.2s;
+}
+
+#treasury-of-descriptions{
+    display: none;
 }
