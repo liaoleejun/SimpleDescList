@@ -30,11 +30,12 @@ $(document).ready(function () {
             let descValue = document.getElementById(id);
             let itemValue = descValue;
             // 描述的名: descsNameOrdered[i]
-            let name = "<b> " + descsNameOrdered[i] + "</b><br>";
+            let name = "<b>" + descsNameOrdered[i] + "</b><br>";
             // 一个 ^ 号
             let caret = "<a class='caret-anchor' href='#" + descsNameIdOrdered[i] + "'>^</a>";
             // ^ 描述的名 描述的值
-            $(itemValue).prepend(caret, name);
+            $(itemValue).prepend(name);
+            $(itemValue).append(" ", caret);
             if (itemValue !== null) {
                 item.appendChild(itemValue);
                 document.getElementById('descriptions-append').appendChild(item);
