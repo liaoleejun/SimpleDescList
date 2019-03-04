@@ -20,14 +20,15 @@ $(document).ready(function () {
         descsNameIdOrdered.indexOf(descNameId) === -1 ? descsNameIdOrdered.push(descNameId) : console.log(descNameId + " already exists");
     }
 
-    /* 2. 生成排好序的描述，附在最后 */
+    /* 2. 生成排好序的描述列表，附在最后 */
     if (descsValueRefOrdered.length > 0) {
         $(document.body).append("<div><h2>Description List Append</h2><ul id='descriptions-append'></ul></div>");
         for (let i = 0; i < descsValueRefOrdered.length; i++) {
             let id = descsValueRefOrdered[i].substring(1);
             let item = document.createElement('li');
             // 描述的值: document.getElementById(id)
-            let itemValue = document.getElementById(id);
+            let descValue = document.getElementById(id);
+            let itemValue = descValue;
             // 描述的名: descsNameOrdered[i]
             let name = "<b>" + descsNameOrdered[i] + "</b><br>";
             // 一个 ^ 号
