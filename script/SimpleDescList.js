@@ -1,34 +1,42 @@
 $(document).ready(function () {
-    /* 1. 描述排序
-     *
-     *    按照引用在 HTML 文档中出现顺序, 把引用的 data-ref 生成无重复值数组
-     *    descsOrdered
-     */
+    /* 1. 把描述进行排序 */
     let descs = $(".description");
-    // descNameOrdered 是由description的HTML值构成的无重复数组，按照在HTML文档中出现的顺序；
-    // descsRefOrdered 是由description的href的值构成的无重复数组，按照在HTML文档中出现的顺序；
-    // "name" & "value ref": descNameOrdered表示name，descsRefOrdered表示value的引用。
+    // descsNameOrdered 是由class为description的元素，的HTML值，构成的无重复数组（按照在HTML文档中出现的顺序）；
+    // descsValueRefOrdered 是由class为description的元素，的href值，构成的无重复数组（按照在HTML文档中出现的顺序）；
+    // descsNameIdOrdered 是由class为description的元素，的id值，构成的无重复数组（按照在HTML文档中出现的顺序）；
     let descsNameOrdered = [];
-    let descsRefOrdered = [];
+    let descsValueRefOrdered = [];
+    let descsNameIdOrdered = [];
     for (let i = 0; i < descs.length; i++) {
         let descName = descs[i].innerHTML;
-        let descRef = descs[i].getAttribute('href');
+        let descValueRef = descs[i].getAttribute('href');
+        let descNameId = descName + "-" + descValueRef.substr(1); // 必须去掉#号
+
+        descs[i].setAttribute("id", descNameId);
+
         // array push only if not exist
         descsNameOrdered.indexOf(descName) === -1 ? descsNameOrdered.push(descName) : console.log(descName + " already exists");
-        descsRefOrdered.indexOf(descRef) === -1 ? descsRefOrdered.push(descRef) : console.log(descRef + " already exists");
+        descsValueRefOrdered.indexOf(descValueRef) === -1 ? descsValueRefOrdered.push(descValueRef) : console.log(descValueRef + " already exists");
+        descsNameIdOrdered.indexOf(descNameId) === -1 ? descsNameIdOrdered.push(descNameId) : console.log(descNameId + " already exists");
     }
 
     /* 2. 生成排好序的描述，附在最后 */
-    if (descsRefOrdered.length > 0) {
+    if (descsValueRefOrdered.length > 0) {
         $(document.body).append("<div><h2>Description List Append</h2><ul id='descriptions-append'></ul></div>");
-        for (let i = 0; i < descsRefOrdered.length; i++) {
-            let id = descsRefOrdered[i].substring(1);;
-            let desc = document.createElement('li');
-            desc.innerHTML = "<b>" + descsNameOrdered[i] + "</b>";
-            let descValue = document.getElementById(id);
-            if (descValue !== null) {
-                desc.appendChild(descValue);
-                document.getElementById('descriptions-append').appendChild(desc);
+        for (let i = 0; i < descsValueRefOrdered.length; i++) {
+            let id = descsValueRefOrdered[i].substring(1);
+            let item = document.createElement('li');
+            // 描述的值: document.getElementById(id)
+            let itemValue = document.getElementById(id);
+            // 描述的名: descsNameOrdered[i]
+            let name = "<b>" + descsNameOrdered[i] + "</b><br>";
+            // 一个 ^ 号
+            let caret = "<a href='#" + descsNameIdOrdered[i] + "'>^</a>";
+            // ^ 空格 描述的名 描述的值
+            $(itemValue).prepend(caret, " ", name);
+            if (itemValue !== null) {
+                item.appendChild(itemValue);
+                document.getElementById('descriptions-append').appendChild(item);
             }
         }
     }
