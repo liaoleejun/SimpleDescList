@@ -10,7 +10,7 @@ $(document).ready(function () {
     for (let i = 0; i < descs.length; i++) {
         let descName = descs[i].innerHTML;
         let descValueRef = descs[i].getAttribute('href');
-        let descNameId = descName + "-" + descValueRef.substr(1); // 必须去掉#号
+        let descNameId = "desc" + "-" + descValueRef.substr(1); // 必须去掉#号
 
         descs[i].setAttribute("id", descNameId);
 
