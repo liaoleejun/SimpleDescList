@@ -12,7 +12,7 @@ $(document).ready(function () {
         let descValueRef = descs[i].getAttribute('href');
         let descNameId = "desc" + "-" + descValueRef.substr(1); // 必须去掉#号
 
-        descs[i].setAttribute("id", descNameId);
+        // descs[i].setAttribute("id", descNameId);
 
         // array push only if not exist
         descsNameOrdered.indexOf(descName) === -1 ? descsNameOrdered.push(descName) : console.log(descName + " already exists");
@@ -31,11 +31,7 @@ $(document).ready(function () {
             let itemValue = descValue;
             // 描述的名: descsNameOrdered[i]
             let name = "<b>" + descsNameOrdered[i] + "</b><br>";
-            // 一个 ^ 号
-            let caret = "<a class='caret-anchor' href='#" + descsNameIdOrdered[i] + "'>^</a>";
-            // ^ 描述的名 描述的值
             $(itemValue).prepend(name);
-            $(itemValue).append(" ", caret);
             if (itemValue !== null) {
                 item.appendChild(itemValue);
                 document.getElementById('descriptions-append').appendChild(item);
